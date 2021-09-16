@@ -1,41 +1,48 @@
 from bs4 import BeautifulSoup
 import requests
+from utils import *
 import json
 import re
 
 #Crawler de sorts
-html_text = requests.get('https://aonprd.com/Spells.aspx?Class=All')
-soup = BeautifulSoup(html_text.content, 'html.parser')
+main_page = requests.get('https://aonprd.com/Spells.aspx?Class=All')
+soup = BeautifulSoup(main_page.content, 'lxml')
 
-
-for link in soup.find_all('a')[98:99]: #3137
+for link in soup.find_all('a')[98:110]: #[105:108] #3137
     page = requests.get('https://aonprd.com/'+link.get('href'))
-    soup_bis = BeautifulSoup(page.content, 'html.parser')
-    #sort_html = soup_bis.find(id='ctl00_MainContent_DataListTypes_ctl00_LabelName') #.text.replace(' ', '')
-    sort_html = soup_bis.find_all('span')[-1]
-    for token in sort_html:
-        print(token)
+    soup_bis = BeautifulSoup(page.content, 'lxml')
+    table_html = soup_bis.find_all('table')[-1]
+    #print(table_html)
 
-    #print(sort_html)
-    #print('\n')
+    spans_html = table_html.find_all('span')
+    #print(len(spans_html))
 
-
-    """
-    print("name:", sort_html.find("h1").text)
-    print("level:", sort_html.get_text()[sort_html.get_text().find('Level ') + 6:sort_html.get_text().find('Casting')])
-    print("components:", sort_html.get_text()[sort_html.get_text().find('Components ') + 11:sort_html.get_text().find('EffectRange')])
-    print("spell_resistance:", True if ("Spell Resistance" in sort_html.get_text()) else False)
-    print('\n')
-    """
-
-    """
-    sort = {
-        "name":sort_html.find("h1").text
-        "level":sort_html.get_text()[sort_html.get_text().find('Level ')+6:sort_html.get_text().find('Casting')]
-        "components":sort_html.get_text()[sort_html.get_text().find('Components ')+11:sort_html.get_text().find('EffectRange')]
-        "spell_resistance":True if ("Spell Resistance" in sort_html.get_text()) else False
-    }
-    """
+    for i in range(len(spans_html)):
+        try:
+            span = spans_html[i].get_text()
+            #print(span)
+        except:
+            pass
+        try:
+            print("name:", spans_html[i].find_all("h1")[i].text).strip()
+        except:
+            pass
+        try:
+            if (findnth(span, 'Level', i) != -1):
+                print("level:", span[findnth(span, 'Level ', i)+6:findnth(span, 'Casting', 2*i)]) # la bidouille ~(-_-)~
+        except:
+            pass
+        try:
+            if (findnth(span, 'Components', i) != -1):
+                print("components:", span[findnth(span, 'Components ', i)+11:findnth(span, 'EffectRange', i)])
+        except:
+            pass
+        try:
+            if (findnth(span, 'Components', i) != -1):
+                print("spell_resistance:", True if ("Spell Resistance" in span[findnth(span, 'Effect', i):findnth(span, 'Description', i)]) else False)
+                print("\n")
+        except:
+            pass
 
 
 
