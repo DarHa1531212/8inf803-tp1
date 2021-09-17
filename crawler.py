@@ -66,5 +66,5 @@ for link in soup.find_all('a')[98:3137]: #[105:108] #3137
 
 print(round(cpt/(3137-98)*100),'%')
 
-with open('C:/Users/user/Desktop/UQAC_3A/8INF803_Base_de_donnée_répartie/TP_BDR/TP1_BDR/results/result.json', 'w') as fout:
+with open('./results/result.json', 'w') as fout:
     fout.write('[' + ',\n'.join(json.dumps(i) for i in spells) + ']\n')
