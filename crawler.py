@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 from utils import *
 import json
-import re
 
 #Crawler de sorts
 main_page = requests.get('https://aonprd.com/Spells.aspx?Class=All')
