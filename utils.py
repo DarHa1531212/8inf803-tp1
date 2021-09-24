@@ -5,3 +5,13 @@ def findnth(string, substring, n):
     if len(parts) <= n + 1:
         return -1
     return len(string) - len(parts[-1]) - len(substring)
+
+def componentsProcess(component_str):
+    component = []
+    if ('V' in component_str):
+        component.append('V')
+    if ('S' in component_str):
+        component.append('S')
+    if ('M' in component_str):
+        component.append('M')
+    return component
