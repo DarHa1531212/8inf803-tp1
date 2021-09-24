@@ -37,8 +37,9 @@ from pyspark import SparkContext, SparkConf
 
 conf = SparkConf().setAppName('MyFirstStandaloneApp')
 sc = SparkContext(conf=conf)
+sc.setLogLevel("ERROR")
 
-text_file = sc.textFile("shakespeare.txt")
+text_file = sc.textFile("C:/Users/user/Desktop/UQAC_3A/8INF803_Base_de_donnée_répartie/TP_BDR/TP1_BDR/shakespeare.txt")
 
 counts = text_file.flatMap(lambda line: line.split(" ")) \
              .map(lambda word: (word, 1)) \
