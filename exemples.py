@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+from utils import componentsProcess
+from utils import levelsProcess
 
 #Exemple 1
 """
@@ -33,6 +35,7 @@ print('end')
 """
 
 # Shakespeare
+"""
 from pyspark import SparkContext, SparkConf
 
 conf = SparkConf().setAppName('MyFirstStandaloneApp')
@@ -46,3 +49,16 @@ counts = text_file.flatMap(lambda line: line.split(" ")) \
              .reduceByKey(lambda a, b: a + b)
 
 print ("Number of elements: " + str(counts.count()))
+"""
+
+# test de componentsProcess()
+"""
+test = "V, S, M (a rabbit’s foot)"
+test2 = componentsProcess(test)
+for elem in test2:
+    print(elem)
+"""
+
+# test de levelsProcess()
+test3 = "antipaladin 3, arcanist 3, sorcerer 3, witch 3, wizard 9 (werebat)"
+print(levelsProcess(test3))
