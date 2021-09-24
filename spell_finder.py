@@ -18,8 +18,14 @@ result = df.filter(df.level.contains("wizard 1")
                    | df.level.contains("wizard 2")
                    | df.level.contains("wizard 3")
                    | df.level.contains("wizard 4")).collect()
-print(result)
 
+#result = df.filter(df.level <= 4).collect()
+
+#print(type(result))
+rdd2 = sc.parallelize(result)
+df2 = rdd2.toDF()
+df2.printSchema()
+df2.show(truncate=False)
 
 
 
