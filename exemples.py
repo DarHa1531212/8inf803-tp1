@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from utils import componentsProcess
-from utils import levelsProcess
+from utils import *
 
 #Exemple 1
 """

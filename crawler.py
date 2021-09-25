@@ -39,13 +39,13 @@ for link in soup.find_all('a')[98:3137]: #[105:108] #3137
             spell["name"] = "NA"
         try:
             if (findnth(span, 'Level', i) != -1):
-                spell["level"] = span[findnth(span, 'Level ', i)+6:findnth(span, 'Casting', 2*i)]
+                spell["level"] = levelsProcess(span[findnth(span, 'Level ', i)+6:findnth(span, 'Casting', 2*i)])
                 #print("level:", span[findnth(span, 'Level ', i)+6:findnth(span, 'Casting', 2*i)]) # la bidouille ~(-_-)~
         except:
             spell["level"] = "NA"
         try:
             if (findnth(span, 'Components', i) != -1):
-                spell["components"] = span[findnth(span, 'Components ', i)+11:findnth(span, 'EffectRange', i)]
+                spell["components"] = componentsProcess(span[findnth(span, 'Components ', i)+11:findnth(span, 'EffectRange', i)])
                 #print("components:", span[findnth(span, 'Components ', i)+11:findnth(span, 'EffectRange', i)])
         except:
             spell["components"] = "NA"
