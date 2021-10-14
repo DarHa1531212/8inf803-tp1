@@ -8,7 +8,7 @@ from pyspark.sql.functions import lit, concat_ws, concat, collect_list, array
 import os
 
 cwd = os.getcwd()
-if '/TP1_BDR' not in cwd:
+if '\\TP1_BDR' not in cwd:
     cwd += '/TP1_BDR'
 
 conf = SparkConf().setAppName('Spell Finder')
@@ -21,19 +21,11 @@ data = json.load(open(cwd + "/results/result.json"))
 rdd = sc.parallelize(data)
 df = rdd.toDF()
 
-result = df.filter(df.level <= 4)
-result = result.where(df.components == array(*(lit(x) for x in ['V']))).collect()
+df.createTempView("spells_table")
 
-# print(type(result))
+result = spark.sql("SELECT * FROM spells_table WHERE level <= 4 AND components[0] == 'V' AND cardinality(components) == 1").collect()
 rdd2 = sc.parallelize(result)
 df2 = rdd2.toDF()
-df2.printSchema()
-df2.show(truncate=False)
 
-
-def stringify(c: Column):
-    return concat(concat_ws(",", c))
-
-#df2.write.json(cwd + "/results/result2.json")
-df2.withColumn("components", stringify("components")).toPandas().to_csv(cwd + "/results/result2.csv", header=True)
+df2.show(20)
 

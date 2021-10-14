@@ -59,5 +59,14 @@ for elem in test2:
 """
 
 # test de levelsProcess()
+"""
 test3 = "antipaladin 3, arcanist 3, sorcerer 3, witch 3, wizard 9 (werebat)"
 print(levelsProcess(test3))
+"""
+
+#
+import os
+
+cwd = os.getcwd()  # Get the current working directory (cwd)
+files = os.listdir(cwd)  # Get all the files in that directory
+print("Files in %r: %s" % (cwd, files))
