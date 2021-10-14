@@ -8,14 +8,18 @@ USE devoir;
 -- Création de la bd
 
 -- Table tblSpell
-DROP TABLE IF EXISTS tblSpell; 
+DROP TABLE IF EXISTS spell
 
-CREATE TABLE tblSpell(
-	SpellId					Int 			NOT NULL UNIQUE AUTO_INCREMENT,
-    SpellName				varchar (30)	NOT NULL UNIQUE,
-	SpellLevel				Int 			NOT NULL,
-    SpellComponents			varchar (18)	NOT NULL,
-	SpellResistance			bit 			NOT NULL,
-	PRIMARY KEY (SpellId)
+create table spell
+(
+    id               int          not null,
+    components       text         null,
+    level            int          not null,
+    name             varchar(255) not null,
+    spell_resistance text         not null,
+    constraint final_final_id_uindex
+        unique (id),
+    constraint final_final_name_uindex
+        unique (name)
 );
 
