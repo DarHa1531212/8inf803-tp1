@@ -1,9 +1,13 @@
-#source: https://www.tutorialspoint.com/How-to-find-the-nth-occurrence-of-substring-in-a-string-in-Python
+from pyspark.sql.catalog import Column
+from pyspark.sql.functions import concat_ws, concat
+
+
 def findnth(string, substring, n):
     parts = string.split(substring, n + 1)
     if len(parts) <= n + 1:
         return -1
     return len(string) - len(parts[-1]) - len(substring)
+
 
 def componentsProcess(component_str):
     component = []
@@ -13,6 +17,7 @@ def componentsProcess(component_str):
         component.append(word.strip(' '))
     return component
 
+
 def levelsProcess(level_str):
     tmp = []
     if('wizard' in level_str):
@@ -21,3 +26,7 @@ def levelsProcess(level_str):
     else:
         level = 0
     return level
+
+
+def stringify(c):
+    return concat(concat_ws(",", c))

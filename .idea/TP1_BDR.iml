@@ -2,9 +2,6 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <content url="file://C:/ctv">
-      <sourceFolder url="file://C:/ctv/spark/spark-3.0.3-bin-hadoop2.7/python" isTestSource="false" />
-    </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (TP1_BDR)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
